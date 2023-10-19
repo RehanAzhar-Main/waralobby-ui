@@ -1,0 +1,6 @@
+.overflow__carousel {
+  display: flex;
+  flex-wrap: no-wrap;
+  overflow-x: auto;
+  padding-bottom: 16px;
+}

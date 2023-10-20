@@ -1,15 +1,13 @@
-import { BottomNavigation,BottomNavigationItem,BottomNavigationLabel,BottomNavigationIcon } from 'chakra-ui-bottom-navigation';
+import { 
+    BottomNavigation,
+    BottomNavigationItem,
+    BottomNavigationLabel,
+    BottomNavigationIcon 
+} from 'chakra-ui-bottom-navigation';
 import {BiHomeAlt2, BiSearchAlt, BiHistory, } from 'react-icons/bi'
 import {CgProfile} from 'react-icons/cg'
-export const NavigationExample = () => {
-    // const router = useRouter();
-  
-    // const handleChange = useCallback(
-    //   (path) => {
-    //     router.push(path);
-    //   },
-    //   [router.push]
-    // );
+
+export const Navigation = () => {
 
     
   

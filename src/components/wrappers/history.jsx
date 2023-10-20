@@ -6,13 +6,13 @@ import {
 } from '@chakra-ui/react'
 
 import HistoryCard from '../ui/HistoryCard'
-import { NavigationExample } from '../ui/Navbar'
+import { Navigation } from '../ui/Navbar'
 
 
 const franchiseData = [
-  { id: 1, name: 'Mixue', address: 'Jl. Peter 1', contact: '08123456789', status: 'Accepted'},
-  { id: 1, name: 'KFC', address: 'Jl. Anggur 1', contact: '081235621321', status: 'Waiting'},
-  { id: 1, name: 'McDonald', address: 'Jl. Jawa 1', contact: '0812357126', status: 'Rejected'},
+  { id: 1, name: 'Mixue', address: 'Jl. Peter 1', contact: '08123456789', status: 'accepted'},
+  { id: 1, name: 'KFC', address: 'Jl. Anggur 1', contact: '081235621321', status: 'waiting'},
+  { id: 1, name: 'McDonald', address: 'Jl. Jawa 1', contact: '0812357126', status: 'rejected'},
 ]
 
 
@@ -66,7 +66,7 @@ const HistoryPage = () => {
         </Stack>
       </Box>
 
-      <NavigationExample/>
+      <Navigation/>
     </>
   )
 }

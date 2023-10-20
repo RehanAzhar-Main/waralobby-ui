@@ -20,9 +20,9 @@ export default function HistoryCard({ name,address,contact,status}){
         // const colorTextLight = checked ? 'white' : 'purple.600'
 
         let statColor;
-        if (status === "Accepted") {
+        if (status === "accepted") {
             statColor = 'green';
-        } else if (status === "Waiting") {
+        } else if (status === "waiting") {
             statColor = 'orange';
         } else {
             statColor = 'red';

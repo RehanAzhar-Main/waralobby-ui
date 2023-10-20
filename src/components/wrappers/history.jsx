@@ -1,115 +1,73 @@
-'use client'
-
 import {
   Box,
-  Button,
   Divider,
   Heading,
-  List,
-  ListIcon,
-  ListItem,
   Stack,
-  Text,
-  useColorModeValue,
 } from '@chakra-ui/react'
-import { FaCheckCircle } from 'react-icons/fa'
 
-const options = [
-  { id: 1, desc: '1 lorem ipsum' },
-  { id: 2, desc: 'Lorem, ipsum dolor.' },
-  { id: 3, desc: 'Monthly Updates' },
+import HistoryCard from '../ui/HistoryCard'
+import { NavigationExample } from '../ui/Navbar'
+
+
+const franchiseData = [
+  { id: 1, name: 'Mixue', address: 'Jl. Peter 1', contact: '08123456789', status: 'Accepted'},
+  { id: 1, name: 'KFC', address: 'Jl. Anggur 1', contact: '081235621321', status: 'Waiting'},
+  { id: 1, name: 'McDonald', address: 'Jl. Jawa 1', contact: '0812357126', status: 'Rejected'},
 ]
 
-const PackageTier = ({ title, options, typePlan, checked = false }) => {
-  const colorTextLight = checked ? 'white' : 'purple.600'
-  const bgColorLight = checked ? 'purple.400' : 'gray.300'
 
-  const colorTextDark = checked ? 'white' : 'purple.500'
-  const bgColorDark = checked ? 'purple.400' : 'gray.300'
-
-  return (
-    <Stack
-      p={3}
-      py={3}
-      justifyContent={{
-        base: 'flex-start',
-        md: 'space-around',
-      }}
-      direction={{
-        base: 'column',
-        md: 'row',
-      }}
-      alignItems={{ md: 'center' }}>
-      <Heading size={'md'}>{title}</Heading>
-      <List spacing={3} textAlign="start">
-        {options.map((desc, id) => (
-          <ListItem key={desc.id}>
-            <ListIcon as={FaCheckCircle} color="green.500" />
-            {desc.desc}
-          </ListItem>
-        ))}
-      </List>
-      <Heading size={'xl'}>{typePlan}</Heading>
-      <Stack>
-        <Button
-          size="md"
-          color={useColorModeValue(colorTextLight, colorTextDark)}
-          bgColor={useColorModeValue(bgColorLight, bgColorDark)}>
-          Get Started
-        </Button>
-      </Stack>
-    </Stack>
-  )
-}
 const HistoryPage = () => {
   return (
-    <Box py={6} px={5} width="full">
-      <Stack spacing={4} width={'100%'} direction={'column'}>
-        <Stack
-          p={5}
-          alignItems={'center'}
-          justifyContent={{
-            base: 'flex-start',
-            md: 'space-around',
-          }}
-          direction={{
-            base: 'column',
-            md: 'row',
-          }}>
+    <>
+      <Box py={6} px={5} width="full">
+        <Stack spacing={4} width={'100%'} direction={'column'}>
           <Stack
-            width={{
-              base: '100%',
-              md: '40%',
+            p={5}
+            alignItems={'center'}
+            justifyContent={{
+              base: 'flex-start',
+              md: 'space-around',
             }}
-            textAlign={'center'}>
-            <Heading size={'lg'}>
-              The Right Plan for <Text color="purple.400">Your Business</Text>
-            </Heading>
-          </Stack>
-          <Stack
-            width={{
-              base: '100%',
-              md: '60%',
+            direction={{
+              base: 'column',
+              md: 'row',
             }}>
-            <Text textAlign={'center'}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam quod in
-              iure vero. Facilis magnam, sed officiis commodi labore odit.
-            </Text>
+            <Stack
+              width={{
+                base: '100%',
+                md: '40%',
+              }}
+              textAlign={'center'}>
+              <Heading size={'2xl'} color="purple.400">
+                History
+              </Heading>
+            </Stack>
+            <Stack
+              width={{
+                base: '100%',
+                md: '60%',
+              }}>
+            </Stack>
           </Stack>
+          <Divider />
+          <Divider />
+          {franchiseData.map((franchise)=> {
+            return (
+              <HistoryCard
+              name={franchise.name}
+              address={franchise.address}
+              contact={franchise.contact}
+              status={franchise.status}
+            />
+            )
+          })}
+
+          <Divider />
         </Stack>
-        <Divider />
-        <PackageTier title={'Starter'} typePlan="Free" options={options} />
-        <Divider />
-        <PackageTier
-          title={'Lorem Plus'}
-          checked={true}
-          typePlan="$32.00"
-          options={options}
-        />
-        <Divider />
-        <PackageTier title={'Lorem Pro'} typePlan="$50.00" options={options} />
-      </Stack>
-    </Box>
+      </Box>
+
+      <NavigationExample/>
+    </>
   )
 }
 

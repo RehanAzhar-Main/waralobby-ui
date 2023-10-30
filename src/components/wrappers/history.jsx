@@ -1,20 +1,31 @@
-import {
-  Box,
-  Divider,
-  Heading,
-  Stack,
-} from '@chakra-ui/react'
+import { Box, Divider, Heading, Stack } from '@chakra-ui/react'
 
 import HistoryCard from '../ui/HistoryCard'
 import { Navigation } from '../ui/Navbar'
 
-
 const franchiseData = [
-  { id: 1, name: 'Mixue', address: 'Jl. Peter 1', contact: '08123456789', status: 'accepted'},
-  { id: 1, name: 'KFC', address: 'Jl. Anggur 1', contact: '081235621321', status: 'waiting'},
-  { id: 1, name: 'McDonald', address: 'Jl. Jawa 1', contact: '0812357126', status: 'rejected'},
+  {
+    id: 1,
+    name: 'Mixue',
+    address: 'Jl. Peter 1',
+    contact: '08123456789',
+    status: 'accepted',
+  },
+  {
+    id: 1,
+    name: 'KFC',
+    address: 'Jl. Anggur 1',
+    contact: '081235621321',
+    status: 'waiting',
+  },
+  {
+    id: 1,
+    name: 'McDonald',
+    address: 'Jl. Jawa 1',
+    contact: '0812357126',
+    status: 'rejected',
+  },
 ]
-
 
 const HistoryPage = () => {
   return (
@@ -31,13 +42,15 @@ const HistoryPage = () => {
             direction={{
               base: 'column',
               md: 'row',
-            }}>
+            }}
+          >
             <Stack
               width={{
                 base: '100%',
                 md: '40%',
               }}
-              textAlign={'center'}>
+              textAlign={'center'}
+            >
               <Heading size={'2xl'} color="purple.400">
                 History
               </Heading>
@@ -46,27 +59,25 @@ const HistoryPage = () => {
               width={{
                 base: '100%',
                 md: '60%',
-              }}>
-            </Stack>
+              }}
+            ></Stack>
           </Stack>
           <Divider />
           <Divider />
-          {franchiseData.map((franchise)=> {
+          {franchiseData.map((franchise) => {
             return (
               <HistoryCard
-              name={franchise.name}
-              address={franchise.address}
-              contact={franchise.contact}
-              status={franchise.status}
-            />
+                name={franchise.name}
+                address={franchise.address}
+                contact={franchise.contact}
+                status={franchise.status}
+              />
             )
           })}
 
           <Divider />
         </Stack>
       </Box>
-
-      <Navigation/>
     </>
   )
 }

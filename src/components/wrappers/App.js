@@ -15,6 +15,8 @@ import Login from './login'
 import Register from './register'
 import { Box, Container } from '@chakra-ui/react'
 import { Navigation } from '../ui/Navbar'
+import FranchisePage from './franchise'
+import DetailFranchise from './detail-franchise'
 
 function App() {
   const navigate = useNavigate()
@@ -23,18 +25,20 @@ function App() {
   }
   return (
     <Container pt="5" minH="calc(100vh - 48px)" pb="48px">
-      {/* <Router> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/history" element={<HistoryPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/franchise" element={<FranchisePage />} />
+        {/* detail franchise */}
+        <Route path="/franchise/:id" element={<DetailFranchise />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
       <Box h="48px">
         <Navigation handleChange={handleNav} />
       </Box>
-      {/* </Router> */}
     </Container>
   )
 }

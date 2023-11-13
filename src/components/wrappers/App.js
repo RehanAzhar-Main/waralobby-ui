@@ -5,6 +5,7 @@ import {
   Routes,
   Route,
   useNavigate,
+  Navigate
 } from 'react-router-dom'
 // import '../../assets/style/App.css'
 
@@ -17,6 +18,7 @@ import { Box, Container } from '@chakra-ui/react'
 import { Navigation } from '../ui/Navbar'
 import FranchisePage from './franchise'
 import DetailFranchise from './detail-franchise'
+import { isAuthenticated } from '../../services/authService';
 
 function App() {
   const navigate = useNavigate()
@@ -27,8 +29,18 @@ function App() {
     <Container pt="5" minH="calc(100vh - 48px)" pb="48px">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/history" element={<HistoryPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/history" element={isAuthenticated() ? (
+            <HistoryPage />
+          ) : (
+            <Navigate to="/login" replace />
+          )}  
+        />
+        <Route path="/profile" element={isAuthenticated() ? (
+            <ProfilePage />
+          ) : (
+            <Navigate to="/login" replace />
+          )} 
+        />
         <Route path="/franchise" element={<FranchisePage />} />
         {/* detail franchise */}
         <Route path="/franchise/:id" element={<DetailFranchise />} />

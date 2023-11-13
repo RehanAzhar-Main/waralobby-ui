@@ -6,6 +6,8 @@ import {
   Text,
   IconButton,
   useBreakpointValue,
+  Button,
+  useDisclosure
 } from '@chakra-ui/react'
 import {
   IconArrowBigLeftFilled,
@@ -16,6 +18,9 @@ import {
   IconWallet,
 } from '@tabler/icons-react'
 import { React, useState } from 'react'
+
+import ModalForm from '../ui/ModalForm'
+// import React  from 'react'
 
 // And react-slick as our Carousel Lib
 import Slider from 'react-slick'
@@ -32,6 +37,8 @@ export default function DetailFranchise() {
     slidesToShow: 1,
     slidesToScroll: 1,
   }
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const [slider, setSlider] = useState(0)
 
@@ -134,6 +141,11 @@ export default function DetailFranchise() {
           <Text fontWeight="semibold">2.000.000 / Hari</Text>
         </Stack>
       </Text>
+
+      <Button onClick={onOpen} colorScheme='blue' mt={5}>Apply</Button>
+
+      <div>{<ModalForm isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>}</div>
     </>
+
   )
 }

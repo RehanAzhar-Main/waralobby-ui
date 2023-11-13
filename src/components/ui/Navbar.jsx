@@ -6,7 +6,7 @@ import {
   BottomNavigationIcon,
 } from 'chakra-ui-bottom-navigation'
 import { BiHomeAlt2, BiSearchAlt, BiHistory } from 'react-icons/bi'
-import { CgProfile } from 'react-icons/cg'
+import { CgLogIn, CgProfile } from 'react-icons/cg'
 
 export const Navigation = ({ handleChange }) => {
   const [index, setIndex] = useState('/')
@@ -40,11 +40,22 @@ export const Navigation = ({ handleChange }) => {
         <BottomNavigationIcon as={BiHistory} />
         <BottomNavigationLabel>History</BottomNavigationLabel>
       </BottomNavigationItem>
-
-      <BottomNavigationItem value="/profile">
-        <BottomNavigationIcon as={CgProfile} />
-        <BottomNavigationLabel>Profile</BottomNavigationLabel>
-      </BottomNavigationItem>
+      {
+        // check token
+        // if token exist, show profile
+        // else, show login and register
+        localStorage.getItem('token') ? (
+          <BottomNavigationItem value="/profile">
+            <BottomNavigationIcon as={CgProfile} />
+            <BottomNavigationLabel>Profile</BottomNavigationLabel>
+          </BottomNavigationItem>
+        ) : (
+          <BottomNavigationItem value="/login">
+            <BottomNavigationIcon as={CgLogIn} />
+            <BottomNavigationLabel>Login</BottomNavigationLabel>
+          </BottomNavigationItem>
+        )
+      }
     </BottomNavigation>
   )
 }

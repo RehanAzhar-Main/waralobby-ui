@@ -1,19 +1,27 @@
 'use client'
 
-import { Avatar, Box, Flex, keyframes, Text } from '@chakra-ui/react'
+import { Avatar, Box, Flex, keyframes, Text, Button, Grid, GridItem } from '@chakra-ui/react'
 
 import ProfileCard from '../ui/ProfileCard'
 import { capitalizeFirstLetter } from '../../util/Letter'
 import { Navigation } from '../ui/Navbar'
+import { isLogin, setLogout } from '../../services/authService'
+
+import { BiLogOut } from 'react-icons/bi'
 
 export default function ProfilePage() {
-  // get token from localstorage
-  const token = localStorage.getItem('token')
-  // check if token is exist
-  if (!token) {
-    // if token is not exist, redirect to login page
-    window.location.href = '/login'
-  }
+  // // get token from localstorage
+  // const token = localStorage.getItem('token')
+  // // check if token is exist
+  // if (!token) {
+  //   // if token is not exist, redirect to login page
+  //   window.location.href = '/login'
+  // }
+
+
+  const token = isLogin()
+
+  //split token
   console.log(atob(token.split('.')[1]))
 
   const size = '96px'
@@ -89,8 +97,17 @@ export default function ProfilePage() {
       {Object.keys(ProfileData).map((key) => (
         <ProfileCard data={[key, ProfileData[key]]} />
       ))}
+      <Grid templateColumns='repeat(5, 1fr)' gap={4}>
+        {/* <GridItem colSpan={2} h='10' bg='tomato' /> */}
+        <GridItem colStart={4} colEnd={6} h='10'>
+          <Button onClick={() => {setLogout()}} colorScheme='red' mt={5} leftIcon={<BiLogOut/>}>Logout</Button>
+        </GridItem>
+        
+      </Grid>
+      
 
       <Navigation />
+
     </>
   )
 }

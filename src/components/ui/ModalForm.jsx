@@ -16,6 +16,8 @@ import {
     Text
   } from '@chakra-ui/react'
 
+  import { isLogin } from '../../services/authService';
+
 export default function ModalForm(props) {
     
   
@@ -41,6 +43,7 @@ export default function ModalForm(props) {
         ]
       }
     ];
+    const token = isLogin()
   
     return (
       <>

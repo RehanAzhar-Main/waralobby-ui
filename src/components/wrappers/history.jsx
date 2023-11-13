@@ -1,7 +1,8 @@
-import { Box, Divider, Heading, Stack } from '@chakra-ui/react'
+import { Box, Center, Divider, Stack } from '@chakra-ui/react'
 
 import HistoryCard from '../ui/HistoryCard'
-import { Navigation } from '../ui/Navbar'
+
+import { isLogin } from '../../services/authService'
 
 const franchiseData = [
   {
@@ -28,6 +29,7 @@ const franchiseData = [
 ]
 
 const HistoryPage = () => {
+  isLogin()
   return (
     <>
       <Box py={6} px={5} width="full">
@@ -51,9 +53,9 @@ const HistoryPage = () => {
               }}
               textAlign={'center'}
             >
-              <Heading size={'2xl'} color="purple.400">
+              <Center fontSize={'3xl'} fontWeight='bold' color="blue.400">
                 History
-              </Heading>
+              </Center>
             </Stack>
             <Stack
               width={{

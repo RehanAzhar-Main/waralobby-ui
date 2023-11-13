@@ -43,10 +43,10 @@ export default function ProfileCard(props){
             alignItems={{ md: 'center' }}>
                 <HStack mt={-4} spacing='12px'>
                     {icon}
-                    <Heading size={'lg'} pt={4} pb={4}>{capitalizeFirstLetter(props.data[0])}</Heading>
+                    <Heading size={'md'} pt={4} pb={4}>{capitalizeFirstLetter(props.data[0])}</Heading>
                 </HStack>
                     
-                    <Text fontSize={'xl'} ps={10}>{capitalizeFirstLetter(props.data[1])}</Text>
+                    <Text fontSize={'lg'} ps={10}>{capitalizeFirstLetter(props.data[1])}</Text>
           </Box>
         )
       

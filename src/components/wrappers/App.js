@@ -1,7 +1,6 @@
 // import { useContext, useState } from 'react'
 // import { ActiveNav } from '../../util/AppContext'
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   useNavigate,
@@ -30,9 +29,7 @@ function App() {
         <Route path="/history" element={<HistoryPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/franchise" element={<FranchisePage />} />
-        {/* detail franchise */}
         <Route path="/franchise/:id" element={<DetailFranchise />} />
-
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

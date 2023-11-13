@@ -12,20 +12,31 @@ import {
   Link,
 } from '@chakra-ui/react'
 import { IconMailFilled, IconLock } from '@tabler/icons-react'
+import axios from 'axios'
 
 function Login() {
   const [input, setInput] = useState({})
   const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // check if password and confirm password is same
-    if (input.password !== input.confirmPassword) {
-      alert('Password tidak sama')
-      return
-    }
-    console.log('submit')
-    console.log(input)
+    // submit data to backend
+    await axios
+      .post('https://waralobby.mrayhanfadil.my.id/api/signin', {
+        ...input,
+      })
+      .then((res) => {
+        alert('Login berhasil')
+        console.log(res.data)
+        // set token to localstorage
+        localStorage.setItem('token', res.data.token)
+        // navigate to home
+        navigate('/')
+      })
+      .catch((err) => {
+        alert('login gagal periksa kembali email dan password')
+        console.log(err)
+      })
   }
 
   const handleChange = (e) => {
@@ -66,7 +77,7 @@ function Login() {
           {/* <Text textAlign="right" alignSelf="end">
             Lupa Password?
           </Text> */}
-          <Button mt={2} w="full">
+          <Button mt={2} w="full" type="submit">
             Submit
           </Button>
           <Text mt="2">

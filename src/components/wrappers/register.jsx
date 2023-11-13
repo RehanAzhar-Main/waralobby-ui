@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 import {
@@ -23,15 +24,31 @@ function Register() {
   const [input, setInput] = useState({})
   const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     // check if password and confirm password is same
     if (input.password !== input.confirmPassword) {
       alert('Password tidak sama')
       return
     }
-    console.log('submit')
-    console.log(input)
+    // submit data to backend
+    await axios
+      .post('https://waralobby.mrayhanfadil.my.id/api/signup', {
+        ...input,
+      })
+      .then((res) => {
+        if (res.data.status === 'success') {
+          alert('Register berhasil')
+          console.log(res.data)
+          navigate('/login')
+        } else {
+          alert('Register gagal')
+        }
+      })
+      .catch((err) => {
+        alert('Register gagal')
+        console.log(err)
+      })
   }
 
   const handleChange = (e) => {
@@ -55,7 +72,12 @@ function Register() {
               <InputLeftElement pointerEvents="none">
                 <IconUser />
               </InputLeftElement>
-              <Input type="text" onChange={handleChange} name="name" required />
+              <Input
+                type="text"
+                onChange={handleChange}
+                name="username"
+                required
+              />
             </InputGroup>
           </FormControl>
 
@@ -80,7 +102,12 @@ function Register() {
               <InputLeftElement pointerEvents="none">
                 <IconPhone />
               </InputLeftElement>
-              <Input type="tel" onChange={handleChange} name="phone" required />
+              <Input
+                type="tel"
+                onChange={handleChange}
+                name="phoneNumber"
+                required
+              />
             </InputGroup>
           </FormControl>
 
@@ -108,7 +135,7 @@ function Register() {
               <Input
                 type="password"
                 onChange={handleChange}
-                name="password"
+                name="confirmPassword"
                 required
               />
             </InputGroup>

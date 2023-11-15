@@ -2,14 +2,11 @@ import {
   Box,
   Stack,
   Text,
-  IconButton,
-  useBreakpointValue,
   Button,
   useDisclosure,
+  Image,
 } from '@chakra-ui/react'
 import {
-  IconArrowBigLeftFilled,
-  IconArrowBigRightFilled,
   IconMapPinShare,
   IconUserFilled,
   IconWallet,
@@ -21,110 +18,40 @@ import { isLogin } from '../../services/authService'
 
 // And react-slick as our Carousel Lib
 import Slider from 'react-slick'
+import { useEffect } from 'react'
+import axios from 'axios'
 
-export default function DetailFranchise({
-  name = 'Kebab Turki',
-  description = 'This sofa is perfect for modern tropical spaces, baroque inspired spaces, earthy toned spaces and for people who love a chic design with a sprinkle of vintage design.',
-  owner = 'Andi',
-  location = 'Alun Alun Kota',
-  capital = '2.000.000',
-  image = 'https://placehold.co/600x400?text=Waralobby',
-}) {
-  const settings = {
-    dots: true,
-    arrows: false,
-    fade: true,
-    infinite: true,
-    autoplay: true,
-    speed: 500,
-    autoplaySpeed: 5000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  }
-
+export default function DetailFranchise({}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-
-  const [slider, setSlider] = useState(0)
-
-  const top = useBreakpointValue({ base: '90%', md: '50%' })
-  const side = useBreakpointValue({ base: '30%', md: '10px' })
-
-  const cards = [
-    'https://images.unsplash.com/photo-1612852098516-55d01c75769a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
-    'https://images.unsplash.com/photo-1627875764093-315831ac12f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
-    'https://images.unsplash.com/photo-1571432248690-7fd6980a1ae2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDl8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
-  ]
+  const [data, setData] = useState([])
 
   isLogin()
+  const BASE_URL = process.env.REACT_APP_BASE_URL_API
+
+  useEffect(() => {
+    async function fetchData() {
+      await axios
+        .get(`${BASE_URL}/franchises/${window.location.pathname.split('/')[2]}`)
+        .then((response) => {
+          setData(response.data)
+          console.log(response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+    fetchData()
+  }, [])
 
   return (
     <>
       <Text fontSize="3xl" textAlign="center" fontWeight="bold">
-        {name}
+        {data?.name}
       </Text>
-      <Box
-        position={'relative'}
-        height={'250px'}
-        width={'full'}
-        overflow={'hidden'}
-        mt={5}
-      >
-        {/* CSS files for react-slick */}
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
-        />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-        />
-        {/* Left Icon */}
-        <IconButton
-          aria-label="left-arrow"
-          colorScheme="messenger"
-          borderRadius="full"
-          position="absolute"
-          left={side}
-          top={top}
-          transform={'translate(0%, -50%)'}
-          zIndex={2}
-          onClick={() => slider?.slickPrev()}
-        >
-          <IconArrowBigLeftFilled />
-        </IconButton>
-        {/* Right Icon */}
-        <IconButton
-          aria-label="right-arrow"
-          colorScheme="messenger"
-          borderRadius="full"
-          position="absolute"
-          right={side}
-          top={top}
-          transform={'translate(0%, -50%)'}
-          zIndex={2}
-          onClick={() => slider?.slickNext()}
-        >
-          <IconArrowBigRightFilled />
-        </IconButton>
-        {/* Slider */}
-        <Slider {...settings} ref={(slider) => setSlider(slider)}>
-          {cards.map((url, index) => (
-            <Box
-              key={index}
-              height={'6xl'}
-              position="relative"
-              backgroundPosition="center"
-              backgroundRepeat="no-repeat"
-              backgroundSize="cover"
-              backgroundImage={`url(${url})`}
-            />
-          ))}
-        </Slider>
-      </Box>
+      <Image src={data?.img} alt={data?.name} borderRadius="lg" mt={2} />
+
       <Text textAlign="left" mt={5}>
-        {description}
+        {data?.description}
       </Text>
       <Box>
         <Text textAlign="left" mt={5} fontWeight="semibold">
@@ -133,18 +60,18 @@ export default function DetailFranchise({
         {/* <Divider /> */}
         <Stack direction="row" pt={2}>
           <IconUserFilled />
-          <Text fontWeight="semibold">{owner}</Text>
+          <Text fontWeight="semibold">{data?.owner}</Text>
         </Stack>
         <Stack direction="row" pt={2}>
           <IconMapPinShare />
-          <Text fontWeight="semibold">{location}</Text>
+          <Text fontWeight="semibold">{data?.location}</Text>
         </Stack>
       </Box>
       <Text textAlign="left" mt={5} fontWeight="semibold">
         Potensi Keuntungan
         <Stack direction="row" pt={2}>
           <IconWallet />
-          <Text fontWeight="semibold">{capital} / Hari</Text>
+          <Text fontWeight="semibold">{data?.capital} / Hari</Text>
         </Stack>
       </Text>
       <Button onClick={onOpen} colorScheme="blue" mt={5} w={'full'}>

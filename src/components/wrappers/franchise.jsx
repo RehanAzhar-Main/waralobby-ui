@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom'
 export default function FranchisePage() {
   const BASE_URL = process.env.REACT_APP_BASE_URL_API
   const [franchise, setFranchise] = useState([])
+  const [filtered, setFiltered] = useState([])
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -22,6 +23,13 @@ export default function FranchisePage() {
         .get(`${BASE_URL}/franchises`)
         .then((response) => {
           setFranchise(response.data)
+          // check query params
+          const params = new URLSearchParams(window.location.search)
+          filtered.push(
+            ...response.data.filter((item) =>
+              item.name.toLowerCase().includes(params.get('search'))
+            )
+          )
           console.log(response.data)
         })
         .catch((error) => {
@@ -39,18 +47,29 @@ export default function FranchisePage() {
         <InputRightElement pointerEvents="none">
           <IconSearch />
         </InputRightElement>
-        <Input type="text" placeholder="Cari Franchise" />
+        <Input
+          type="text"
+          placeholder="Cari Franchise"
+          onChange={(e) => {
+            const params = new URLSearchParams(window.location.search)
+            params.set('search', e.target.value)
+            navigate(`/franchise?${params.toString()}`)
+            setFiltered(
+              franchise.filter((item) =>
+                item.name.toLowerCase().includes(e.target.value)
+              )
+            )
+          }}
+        />
       </InputGroup>
       <VStack mt="5">
-        {franchise.map((item, index) => (
+        {filtered.map((item, index) => (
           <CardItem
             key={index}
-            name={item?.name}
+            title={item?.name}
             description={item?.description}
-            owner={item?.owner}
-            location={item?.location}
-            capital={item?.capital}
-            image={item?.image}
+            price={item?.capital}
+            image={item?.img}
             onClick={() => {
               navigate(`/franchise/${item._id}`)
             }}

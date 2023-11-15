@@ -105,12 +105,10 @@ function Home() {
         {franchise.map((item, index) => (
           <CardItem
             key={index}
-            name={item?.name}
+            title={item?.name}
             description={item?.description}
-            owner={item?.owner}
-            location={item?.location}
-            capital={item?.capital}
-            image={item?.image}
+            price={item?.capital}
+            image={item?.img}
             onClick={() => {
               navigate(`/franchise/${item._id}`)
             }}

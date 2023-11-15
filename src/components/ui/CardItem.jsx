@@ -20,7 +20,14 @@ export default function CardItem({
       onClick={onClick}
     >
       <CardBody>
-        <Image src={image} alt={title} borderRadius="lg" />
+        <Image
+          src={image}
+          alt={title}
+          borderRadius="lg"
+          width="100%"
+          height="200px"
+          objectFit={'cover'}
+        />
         <Stack mt="6" spacing="3">
           <Heading size="md">{title}</Heading>
           <Text
@@ -35,7 +42,7 @@ export default function CardItem({
           </Text>
           {variant === 'franchise' && (
             <Text color="blue.600" fontSize="2xl">
-              {price}
+              Rp. {price} / Hari
             </Text>
           )}
         </Stack>

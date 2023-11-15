@@ -23,6 +23,7 @@ import {
 function Register() {
   const [input, setInput] = useState({})
   const navigate = useNavigate()
+  const BASE_URL = process.env.REACT_APP_BASE_URL_API
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -33,7 +34,7 @@ function Register() {
     }
     // submit data to backend
     await axios
-      .post('https://waralobby.mrayhanfadil.my.id/api/signup', {
+      .post(`${BASE_URL}/signup`, {
         ...input,
       })
       .then((res) => {

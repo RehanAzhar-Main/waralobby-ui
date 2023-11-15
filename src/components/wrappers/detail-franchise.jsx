@@ -5,7 +5,7 @@ import {
   IconButton,
   useBreakpointValue,
   Button,
-  useDisclosure
+  useDisclosure,
 } from '@chakra-ui/react'
 import {
   IconArrowBigLeftFilled,
@@ -22,7 +22,14 @@ import { isLogin } from '../../services/authService'
 // And react-slick as our Carousel Lib
 import Slider from 'react-slick'
 
-export default function DetailFranchise() {
+export default function DetailFranchise({
+  name = 'Kebab Turki',
+  description = 'This sofa is perfect for modern tropical spaces, baroque inspired spaces, earthy toned spaces and for people who love a chic design with a sprinkle of vintage design.',
+  owner = 'Andi',
+  location = 'Alun Alun Kota',
+  capital = '2.000.000',
+  image = 'https://placehold.co/600x400?text=Waralobby',
+}) {
   const settings = {
     dots: true,
     arrows: false,
@@ -53,7 +60,7 @@ export default function DetailFranchise() {
   return (
     <>
       <Text fontSize="3xl" textAlign="center" fontWeight="bold">
-        Kebab Turki
+        {name}
       </Text>
       <Box
         position={'relative'}
@@ -117,8 +124,7 @@ export default function DetailFranchise() {
         </Slider>
       </Box>
       <Text textAlign="left" mt={5}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut
-        venenatis magna. In hac habitasse
+        {description}
       </Text>
       <Box>
         <Text textAlign="left" mt={5} fontWeight="semibold">
@@ -127,24 +133,27 @@ export default function DetailFranchise() {
         {/* <Divider /> */}
         <Stack direction="row" pt={2}>
           <IconUserFilled />
-          <Text fontWeight="semibold">Andi</Text>
+          <Text fontWeight="semibold">{owner}</Text>
         </Stack>
         <Stack direction="row" pt={2}>
           <IconMapPinShare />
-          <Text fontWeight="semibold">Alun Alun Kota</Text>
+          <Text fontWeight="semibold">{location}</Text>
         </Stack>
       </Box>
       <Text textAlign="left" mt={5} fontWeight="semibold">
         Potensi Keuntungan
         <Stack direction="row" pt={2}>
           <IconWallet />
-          <Text fontWeight="semibold">2.000.000 / Hari</Text>
+          <Text fontWeight="semibold">{capital} / Hari</Text>
         </Stack>
-      </Text>  
-      <Button onClick={onOpen} colorScheme='blue' mt={5}>Apply</Button>
+      </Text>
+      <Button onClick={onOpen} colorScheme="blue" mt={5} w={'full'}>
+        Apply
+      </Button>
 
-      <div>{<ModalForm isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>}</div>
+      <div>
+        {<ModalForm isOpen={isOpen} onOpen={onOpen} onClose={onClose} />}
+      </div>
     </>
-
   )
 }

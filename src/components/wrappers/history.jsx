@@ -1,8 +1,10 @@
 import { Box, Center, Divider, Stack } from '@chakra-ui/react'
+import axios from 'axios'
+import React, { useState, useEffect, useCallback } from 'react';
 
 import HistoryCard from '../ui/HistoryCard'
-
 import { isLogin } from '../../services/authService'
+import { getUserInfowithToken } from '../../util/userInfo'
 
 const franchiseData = [
   {
@@ -29,7 +31,22 @@ const franchiseData = [
 ]
 
 const HistoryPage = () => {
-  isLogin()
+  const token = isLogin()
+  const user = getUserInfowithToken(token)
+
+  const [history,setHistory] = useState([])
+
+  const fetchHistory = useCallback(async() => {
+    const response = await fetch(`https://waralobby.mrayhanfadil.my.id/api//history/${user.userID}`)
+    const history = await response.json()
+    setHistory(history)
+  })
+  
+  useEffect(() => {
+    fetchHistory()
+  },[fetchHistory]);
+
+
   return (
     <>
       <Box py={6} px={5} width="full">
@@ -66,17 +83,16 @@ const HistoryPage = () => {
           </Stack>
           <Divider />
           <Divider />
-          {franchiseData.map((franchise) => {
+          {history.map((franchise) => {
             return (
               <HistoryCard
-                name={franchise.name}
-                address={franchise.address}
-                contact={franchise.contact}
+                name={franchise.franchiseName}
+                address={franchise.franchiseAddress}
+                contact={franchise.franchisePhone}
                 status={franchise.status}
               />
             )
           })}
-
           <Divider />
         </Stack>
       </Box>

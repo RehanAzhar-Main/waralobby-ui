@@ -27,7 +27,6 @@ function Login() {
       })
       .then((res) => {
         alert('Login berhasil')
-        console.log(res.data)
         // set token to localstorage
         localStorage.setItem('token', res.data.token)
         // navigate to home
@@ -74,9 +73,6 @@ function Login() {
             </InputGroup>
           </FormControl>
 
-          {/* <Text textAlign="right" alignSelf="end">
-            Lupa Password?
-          </Text> */}
           <Button mt={2} w="full" type="submit">
             Submit
           </Button>

@@ -13,6 +13,7 @@ import {
   Input,
   Link,
 } from '@chakra-ui/react'
+
 import {
   IconMailFilled,
   IconLock,
@@ -39,7 +40,6 @@ function Register() {
       .then((res) => {
         if (res.data.status === 'success') {
           alert('Register berhasil')
-          console.log(res.data)
           navigate('/login')
         } else {
           alert('Register gagal')

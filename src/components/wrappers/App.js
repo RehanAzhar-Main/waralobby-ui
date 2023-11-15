@@ -1,11 +1,8 @@
-// import { useContext, useState } from 'react'
-// import { ActiveNav } from '../../util/AppContext'
 import {
   Routes,
   Route,
   useNavigate,
 } from 'react-router-dom'
-// import '../../assets/style/App.css'
 
 import HistoryPage from './history'
 import ProfilePage from './profile'

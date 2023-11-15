@@ -17,12 +17,13 @@ import axios from 'axios'
 function Login() {
   const [input, setInput] = useState({})
   const navigate = useNavigate()
+  const BASE_URL = process.env.REACT_APP_BASE_URL_API
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     // submit data to backend
     await axios
-      .post('https://waralobby.mrayhanfadil.my.id/api/signin', {
+      .post(`${BASE_URL}/signin`, {
         ...input,
       })
       .then((res) => {

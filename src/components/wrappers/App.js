@@ -1,8 +1,7 @@
-import {
-  Routes,
-  Route,
-  useNavigate,
-} from 'react-router-dom'
+// import { useContext, useState } from 'react'
+// import { ActiveNav } from '../../util/AppContext'
+import { Routes, Route, useNavigate } from 'react-router-dom'
+// import '../../assets/style/App.css'
 
 import HistoryPage from './history'
 import ProfilePage from './profile'
@@ -13,6 +12,7 @@ import { Box, Container } from '@chakra-ui/react'
 import { Navigation } from '../ui/Navbar'
 import FranchisePage from './franchise'
 import DetailFranchise from './detail-franchise'
+import DetailBlog from './detail-blog'
 
 function App() {
   const navigate = useNavigate()
@@ -27,6 +27,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/franchise" element={<FranchisePage />} />
         <Route path="/franchise/:id" element={<DetailFranchise />} />
+        <Route path="/blog/:id" element={<DetailBlog />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

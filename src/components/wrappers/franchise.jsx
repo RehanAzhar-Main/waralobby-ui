@@ -1,19 +1,35 @@
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import {
-  Card,
-  CardBody,
-  HStack,
-  Heading,
-  Image,
   Input,
   InputGroup,
   InputRightElement,
-  Stack,
   Text,
   VStack,
 } from '@chakra-ui/react'
 import { IconSearch } from '@tabler/icons-react'
+import CardItem from '../ui/CardItem'
+import { useNavigate } from 'react-router-dom'
 
 export default function FranchisePage() {
+  const BASE_URL = process.env.REACT_APP_BASE_URL_API
+  const [franchise, setFranchise] = useState([])
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    async function fetchData() {
+      await axios
+        .get(`${BASE_URL}/franchises`)
+        .then((response) => {
+          setFranchise(response.data)
+          console.log(response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+    fetchData()
+  }, [])
   return (
     <>
       <Text fontSize="3xl" textAlign="center">
@@ -26,90 +42,20 @@ export default function FranchisePage() {
         <Input type="text" placeholder="Cari Franchise" />
       </InputGroup>
       <VStack mt="5">
-        <Card
-          maxW="sm"
-          style={{
-            flex: '0 0 auto',
-            width: 'auto',
-            marginRight: '16px',
-          }}
-        >
-          <CardBody>
-            <Image
-              src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-              alt="Green double couch with wooden legs"
-              borderRadius="lg"
-            />
-            <Stack mt="6" spacing="3">
-              <Heading size="md">Living room Sofa</Heading>
-              <Text>
-                This sofa is perfect for modern tropical spaces, baroque
-                inspired spaces, earthy toned spaces and for people who love a
-                chic design with a sprinkle of vintage design.
-              </Text>
-              <Text color="blue.600" fontSize="2xl">
-                $450
-              </Text>
-            </Stack>
-          </CardBody>
-        </Card>
-
-        <Card
-          maxW="sm"
-          style={{
-            flex: '0 0 auto',
-            width: 'auto',
-            marginRight: '16px',
-          }}
-        >
-          <CardBody>
-            <Image
-              src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-              alt="Green double couch with wooden legs"
-              borderRadius="lg"
-            />
-            <Stack mt="6" spacing="3">
-              <Heading size="md">Living room Sofa</Heading>
-              <Text>
-                This sofa is perfect for modern tropical spaces, baroque
-                inspired spaces, earthy toned spaces and for people who love a
-                chic design with a sprinkle of vintage design.
-              </Text>
-              <Text color="blue.600" fontSize="2xl">
-                $450
-              </Text>
-            </Stack>
-          </CardBody>
-        </Card>
-
-        <Card
-          maxW="sm"
-          style={{
-            flex: '0 0 auto',
-            width: 'auto',
-
-            marginRight: '16px',
-          }}
-        >
-          <CardBody>
-            <Image
-              src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-              alt="Green double couch with wooden legs"
-              borderRadius="lg"
-            />
-            <Stack mt="6" spacing="3">
-              <Heading size="md">Living room Sofa</Heading>
-              <Text>
-                This sofa is perfect for modern tropical spaces, baroque
-                inspired spaces, earthy toned spaces and for people who love a
-                chic design with a sprinkle of vintage design.
-              </Text>
-              <Text color="blue.600" fontSize="2xl">
-                $450
-              </Text>
-            </Stack>
-          </CardBody>
-        </Card>
+        {franchise.map((item, index) => (
+          <CardItem
+            key={index}
+            name={item?.name}
+            description={item?.description}
+            owner={item?.owner}
+            location={item?.location}
+            capital={item?.capital}
+            image={item?.image}
+            onClick={() => {
+              navigate(`/franchise/${item._id}`)
+            }}
+          />
+        ))}
       </VStack>
     </>
   )

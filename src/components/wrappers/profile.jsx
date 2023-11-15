@@ -6,24 +6,16 @@ import ProfileCard from '../ui/ProfileCard'
 import { capitalizeFirstLetter } from '../../util/Letter'
 import { Navigation } from '../ui/Navbar'
 import { isLogin, setLogout } from '../../services/authService'
+import { getUserInfowithToken } from '../../util/userInfo'
 
 import { BiLogOut } from 'react-icons/bi'
 
 export default function ProfilePage() {
-  // // get token from localstorage
-  // const token = localStorage.getItem('token')
-  // // check if token is exist
-  // if (!token) {
-  //   // if token is not exist, redirect to login page
-  //   window.location.href = '/login'
-  // }
-
 
   const token = isLogin()
 
-  //split token
-  console.log(atob(token.split('.')[1]))
 
+  const user = getUserInfowithToken(token)
   const size = '96px'
   const color = 'teal'
 
@@ -40,17 +32,12 @@ export default function ProfilePage() {
   }
 	`
 
-  const ProfileFetch = {
-    username: 'rehan',
-    email: 'rehan@gmail.com',
-    role: 'admin',
-    contact: '08126351253761',
-  }
   const ProfileData = {
-    username: ProfileFetch.username,
-    email: ProfileFetch.email,
-    contact: ProfileFetch.contact,
+    username: user.username,
+    email: user.email,
+    contact: user.phoneNumber,
   }
+
   return (
     <>
       <Flex
@@ -90,15 +77,14 @@ export default function ProfilePage() {
       </Flex>
       <Box textAlign="center" mt={-8} mb={16}>
         <Text fontSize="3xl" fontWeight="bold">
-          {capitalizeFirstLetter(ProfileFetch.username)}
+          {capitalizeFirstLetter(user.username)}
         </Text>
-        <Text fontSize="xl">{capitalizeFirstLetter(ProfileFetch.role)}</Text>
+        <Text fontSize="xl">{capitalizeFirstLetter(user.rolename)}</Text>
       </Box>
       {Object.keys(ProfileData).map((key) => (
         <ProfileCard data={[key, ProfileData[key]]} />
       ))}
       <Grid templateColumns='repeat(5, 1fr)' gap={4}>
-        {/* <GridItem colSpan={2} h='10' bg='tomato' /> */}
         <GridItem colStart={4} colEnd={6} h='10'>
           <Button onClick={() => {setLogout()}} colorScheme='red' mt={5} leftIcon={<BiLogOut/>}>Logout</Button>
         </GridItem>

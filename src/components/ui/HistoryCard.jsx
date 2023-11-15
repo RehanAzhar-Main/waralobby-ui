@@ -16,6 +16,8 @@ import {
   import { MdBuild } from "react-icons/md"
   import { BsCheckLg, BsClockHistory } from "react-icons/bs"
 
+  import { capitalizeEachWord } from '../../util/Letter'
+
 export default function HistoryCard({ name,address,contact,status}){
 
         // const colorTextLight = checked ? 'white' : 'purple.600'
@@ -54,7 +56,7 @@ export default function HistoryCard({ name,address,contact,status}){
 
             <Flex>
                 <Box spacing='24px'>
-                    <Heading size={'md'} pb={4}>{name}</Heading>
+                    <Heading size={'md'} pb={4}>{capitalizeEachWord(name)}</Heading>
                     <List spacing={3} textAlign="start" fontSize={'sm'}>
                         <ListItem >
                             <ListIcon as={HiOutlineLocationMarker} color="green.500"/>

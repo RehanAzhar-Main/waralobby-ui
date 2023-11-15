@@ -43,6 +43,7 @@ export default function DetailFranchise({}) {
     fetchData()
   }, [])
 
+
   return (
     <>
       <Text fontSize="3xl" textAlign="center" fontWeight="bold">

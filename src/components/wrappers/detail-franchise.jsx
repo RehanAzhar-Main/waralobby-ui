@@ -57,6 +57,7 @@ export default function DetailFranchise({
 
   isLogin()
 
+
   return (
     <>
       <Text fontSize="3xl" textAlign="center" fontWeight="bold">

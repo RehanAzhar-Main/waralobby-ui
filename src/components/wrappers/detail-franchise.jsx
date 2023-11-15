@@ -28,6 +28,12 @@ export default function DetailFranchise({}) {
   isLogin()
   const BASE_URL = process.env.REACT_APP_BASE_URL_API
 
+  const franchiseData = {
+    name: data.name,
+    address: data.location,
+    capital: data.capital
+  }
+
   useEffect(() => {
     async function fetchData() {
       await axios
@@ -80,7 +86,7 @@ export default function DetailFranchise({}) {
       </Button>
 
       <div>
-        {<ModalForm isOpen={isOpen} onOpen={onOpen} onClose={onClose} />}
+        {<ModalForm franchise={franchiseData}  isOpen={isOpen} onOpen={onOpen} onClose={onClose} />}
       </div>
     </>
   )

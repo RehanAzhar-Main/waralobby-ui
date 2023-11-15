@@ -41,10 +41,10 @@ export default function ModalForm(props) {
       {
         section: "Waralaba",
         fields: [
-          { id: 'franchise_name', name: 'Nama', type: 'text' },
-          { id: 'franchise_address', name: 'Alamat', type: 'text' },
-          { id: 'franchise_phone', name: 'Nomor Telepon', type: 'text' },
-          { id: 'funding_capital', name: 'Pendanaan Modal', type: 'text' },
+          { id: 'franchise_name', name: 'Nama', type: 'text', value:props.franchise.name },
+          { id: 'franchise_address', name: 'Alamat', type: 'text', value:props.franchise.address },
+          { id: 'franchise_phone', name: 'Nomor Telepon', type: 'text', value: '0812635712653'},
+          { id: 'funding_capital', name: 'Pendanaan Modal', type: 'text', value:props.franchise.capital},
         ]
       }
     ];
@@ -103,7 +103,7 @@ export default function ModalForm(props) {
                     <>
                       <FormControl>
                         <FormLabel>{field.name}</FormLabel>
-                        <Input id={field.id} placeholder={field.name} />
+                        <Input id={field.id} placeholder={field.name} value={field.value}/>
                       </FormControl>
                     </>
                   )

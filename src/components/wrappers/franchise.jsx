@@ -25,8 +25,8 @@ export default function FranchisePage() {
           setFranchise(response.data)
           // check query params
           const params = new URLSearchParams(window.location.search)
-          filtered.push(
-            ...response.data.filter((item) =>
+          setFiltered(
+            response.data.filter((item) =>
               item.name.toLowerCase().includes(params.get('search'))
             )
           )

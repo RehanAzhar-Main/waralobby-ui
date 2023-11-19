@@ -40,10 +40,10 @@ export default function ModalForm(props) {
       },
       {
         section: "Waralaba",
-        fields: [
+        fields: [ 
           { id: 'franchise_name', name: 'Nama', type: 'text', value:props.franchise.name },
           { id: 'franchise_address', name: 'Alamat', type: 'text', value:props.franchise.address },
-          { id: 'franchise_phone', name: 'Nomor Telepon', type: 'text', value: '0812635712653'},
+          { id: 'franchise_phone', name: 'Nomor Telepon', type: 'text', value: props.franchise.phoneNumber },
           { id: 'funding_capital', name: 'Pendanaan Modal', type: 'text', value:props.franchise.capital},
         ]
       }

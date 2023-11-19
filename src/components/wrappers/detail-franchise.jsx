@@ -10,6 +10,7 @@ import {
   IconMapPinShare,
   IconUserFilled,
   IconWallet,
+  IconPhone,
 } from '@tabler/icons-react'
 import { React, useState } from 'react'
 
@@ -31,7 +32,8 @@ export default function DetailFranchise({}) {
   const franchiseData = {
     name: data.name,
     address: data.location,
-    capital: data.capital
+    capital: data.capital,
+    phoneNumber: data.phoneNumber,
   }
 
   useEffect(() => {
@@ -40,7 +42,7 @@ export default function DetailFranchise({}) {
         .get(`${BASE_URL}/franchises/${window.location.pathname.split('/')[2]}`)
         .then((response) => {
           setData(response.data)
-          console.log(response.data)
+          // console.log(response.data)
         })
         .catch((error) => {
           console.log(error)
@@ -72,6 +74,10 @@ export default function DetailFranchise({}) {
         <Stack direction="row" pt={2}>
           <IconMapPinShare />
           <Text fontWeight="semibold">{data?.location}</Text>
+        </Stack>
+        <Stack direction="row" pt={2}>
+          <IconPhone />
+          <Text fontWeight="semibold">{data?.phoneNumber}</Text>
         </Stack>
       </Box>
       <Text textAlign="left" mt={5} fontWeight="semibold">
